@@ -8,21 +8,7 @@ const CONFIG = {
             urls: "stun.l.google.com:19302"
         },
         {
-            urls: "stun1.l.google.com:19302"
-        },
-        {
-            urls: "stun3.l.google.com:19302"
-        },
-        {
-            urls: "stun4.l.google.com:19302"
-        },
-        {
-            urls: 'turn:numb.viagenie.ca',
-            credential: 'muazkh',
-            username: 'webrtc@live.com'
-        },
-        {
-            urls: "relay1.expressturn.com:3478",
+            urls: "turn:relay1.expressturn.com:3478",
             username: "ef238ZHYV5YA3ND0H2",
             credential: "GpyIpSclVoKFLzgs"
         },

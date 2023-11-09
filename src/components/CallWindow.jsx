@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState} from 'react'
 import {FiPhoneOff} from "react-icons/fi";
-import {BsCameraVideo, BsPhone} from "react-icons/bs";
+import {BsPhone} from "react-icons/bs";
+import {InputGroup} from "react-bootstrap";
 
 export const CallWindow = ({
                                remoteSrc,
@@ -125,21 +126,18 @@ export const CallWindow = ({
 
                 <div>
                     <h1>Write Your message</h1>
-                    <input type="text" className="form-control" placeholder="From" aria-label="message"
-                           onChange={e => setFrom(e.target.value)}/>
-                    <input type="text" className="form-control" placeholder="Message..." aria-label="message"
-                           onChange={onHandleChange}/>
+                    <InputGroup>
+
+                        <input type="text" className="form-control" placeholder="From" aria-label="message"
+                               onChange={e => setFrom(e.target.value)}/>
+                        <input type="text" className="form-control" placeholder="Message..." aria-label="message"
+                               onChange={onHandleChange}/>
+                    </InputGroup>
                     <button className="btn btn-primary" style={{borderRadius: '13%'}} onClick={onHandleSend}>Send
                     </button>
                 </div>
 
                 <div className='control'>
-                    <button
-                        className={video ? '' : 'reject'}
-                        onClick={() => toggleMediaDevice('video')}
-                    >
-                        <BsCameraVideo/>
-                    </button>
                     <button
                         className={audio ? '' : 'reject'}
                         onClick={() => toggleMediaDevice('audio')}

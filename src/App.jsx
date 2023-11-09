@@ -1,4 +1,4 @@
-import "bootstrap/dist/css/bootstrap.min.css";
+//import "bootstrap/dist/css/bootstrap.min.css";
 
 import './styles/app.scss'
 
@@ -102,7 +102,7 @@ export default function App() {
 
     return (
         <div className='app'>
-            <h1>React WebRTC</h1>
+            <h1>Secret Chat</h1>
             <MainWindow startCall={startCall} />
             {calling && (
                 <div className='calling'>

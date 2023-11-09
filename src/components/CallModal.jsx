@@ -12,9 +12,6 @@ export const CallModal = ({ callFrom, startCall, rejectCall }) => {
             <div className='inner'>
                 <p>{`${callFrom} is calling`}</p>
                 <div className='control'>
-                    <button onClick={() => acceptWithVideo(true)}>
-                        <BsCameraVideo />
-                    </button>
                     <button onClick={() => acceptWithVideo(false)}>
                         <BsPhone />
                     </button>

@@ -5,7 +5,7 @@ import socket from './socket'
 const CONFIG = {
     iceServers: [
         {
-            urls: ['stun:stun.l.google.com:19302']
+            urls: 'stun:stun.l.google.com:19302'
         },
         {
             urls: 'turn:numb.viagenie.ca',

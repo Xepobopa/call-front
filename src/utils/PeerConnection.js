@@ -107,8 +107,8 @@ class PeerConnection extends Emitter {
         return this
     }
 
-    getDescription(desc) {
-        this.pc.setLocalDescription(desc)
+    async getDescription(desc) {
+        await this.pc.setLocalDescription(desc)
 
         socket.emit('call', {to: this.remoteId, sdp: desc})
 
@@ -142,15 +142,15 @@ class PeerConnection extends Emitter {
         this.channel.send(message);
     }
 
-    setRemoteDescription(desc) {
-        this.pc.setRemoteDescription(new RTCSessionDescription(desc))
+    async setRemoteDescription(desc) {
+        await this.pc.setRemoteDescription(new RTCSessionDescription(desc))
 
         return this
     }
 
-    addIceCandidate(candidate) {
+    async addIceCandidate(candidate) {
         if (candidate) {
-            this.pc.addIceCandidate(new RTCIceCandidate(candidate))
+            await this.pc.addIceCandidate(new RTCIceCandidate(candidate))
         }
 
         return this

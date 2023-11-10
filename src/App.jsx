@@ -35,15 +35,15 @@ export default function App() {
         if (!pc) return
 
         socket
-            .on('call', (data) => {
+            .on('call', async (data) => {
                 if (data.sdp) {
-                    pc.setRemoteDescription(data.sdp)
+                    await pc.setRemoteDescription(data.sdp)
 
                     if (data.sdp.type === 'offer') {
                         pc.createAnswer()
                     }
                 } else {
-                    pc.addIceCandidate(data.candidate)
+                    await pc.addIceCandidate(data.candidate)
                 }
             })
             .on('end', () => finishCall(false))

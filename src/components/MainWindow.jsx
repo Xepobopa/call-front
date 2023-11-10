@@ -7,15 +7,21 @@ export const MainWindow = ({ startCall }) => {
     const [localId, setLocalId] = useState('')
     const [remoteId, setRemoteId] = useState('')
     const [error, setError] = useState('')
+    const [isInited, setIsInited] = useState(false);
 
     useEffect(() => {
-        console.log('useEffect');
+        if (isInited)
+            return;
+
+        console.log('MainWindow.jsx UseEffect #1: socket init');
+
         socket
             .on('init', ({ id }) => {
                 console.log("[EVENT] INIT, id: ", id);
                 setLocalId(id)
             })
             .emit('init')
+        setIsInited(true);
     }, [])
 
     const callWithVideo = (video) => {

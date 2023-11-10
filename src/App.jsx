@@ -25,6 +25,7 @@ export default function App() {
     const [chat, setChat] = useState([]);
 
     useEffect(() => {
+        console.log('App.jsx UseEffect #1: socket request');
         socket.on('request', ({ from }) => {
             setCallFrom(from)
             setShowModal(true)
@@ -33,11 +34,19 @@ export default function App() {
 
     useEffect(() => {
         if (!pc) return
+        console.log('App.jsx UseEffect #2: socket');
 
         socket
             .on('call', async (data) => {
+                console.log('[INFO] socket.on("call") data: ', data);
                 if (data.sdp) {
-                    await pc.setRemoteDescription(data.sdp)
+                    try {
+                        console.log('[INFO] socket.on("call") data.sdp: ', data.sdp);
+                        await pc.setRemoteDescription(data.sdp)
+                    } catch (e) {
+                        console.error('[ERROR]  -  ', e);
+                    }
+
 
                     if (data.sdp.type === 'offer') {
                         pc.createAnswer()
@@ -68,6 +77,8 @@ export default function App() {
     }
 
     const finishCall = (isCaller) => {
+        console.log('[INFO] Finish Call');
+
         pc.stop(isCaller)
 
         setPc(null)
@@ -78,6 +89,8 @@ export default function App() {
 
         setLocalSrc(null)
         setRemoteSrc(null)
+
+        setChat(null);
     }
 
     const rejectCall = () => {

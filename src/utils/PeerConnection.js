@@ -89,7 +89,8 @@ class PeerConnection extends Emitter {
             socket.emit('end', {to: this.remoteId})
         }
         this.mediaDevice.stop()
-        this.pc.restartIce()
+        //this.pc.restartIce()
+        this.pc.close();
         this.off()
 
         return this
@@ -119,6 +120,9 @@ class PeerConnection extends Emitter {
         console.log('[INFO] create channel');
         try {
             this.channel = this.pc.createDataChannel('channel');
+            this.channel.onclose = () => {
+                console.log('[CLOSE] DataChannel')
+            }
         } catch (e) {
             console.error('[ERROR Fail to create a data channel: ', e)
         }
@@ -150,7 +154,11 @@ class PeerConnection extends Emitter {
 
     async addIceCandidate(candidate) {
         if (candidate) {
-            await this.pc.addIceCandidate(new RTCIceCandidate(candidate))
+            try {
+                await this.pc.addIceCandidate(new RTCIceCandidate(candidate))
+            } catch (e) {
+                console.log('[ERROR] ', e);
+            }
         }
 
         return this

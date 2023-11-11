@@ -8,7 +8,7 @@ class MediaDevice extends Emitter {
                 video: false
             })
             .then((stream) => {
-                this.stream = stream.getAudioTracks();
+                this.stream = stream
                 this.emit('stream', stream)
             })
             .catch(console.error)

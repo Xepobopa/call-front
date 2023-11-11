@@ -56,7 +56,7 @@ export const CallWindow = ({
 
     useEffect(() => {
         if (mediaDevice) {
-            //mediaDevice.toggle('Video', video)
+            mediaDevice.toggle('Video', video)
             mediaDevice.toggle('Audio', audio)
         }
     }, [mediaDevice])
@@ -71,12 +71,14 @@ export const CallWindow = ({
     }
 
     const toggleMediaDevice = (deviceType) => {
-        // if (deviceType === 'video') {
-        //     setVideo(!video)
-        //     mediaDevice.toggle('Video')
-        // }
-        setAudio(!audio)
-        mediaDevice.toggle('Audio')
+        if (deviceType === 'video') {
+            setVideo(!video)
+            mediaDevice.toggle('Video')
+        }
+        if (deviceType === 'audio') {
+            setAudio(!audio)
+            mediaDevice.toggle('Audio')
+        }
     }
 
     const onHandleChange = (e) => {

@@ -75,10 +75,8 @@ export const CallWindow = ({
         //     setVideo(!video)
         //     mediaDevice.toggle('Video')
         // }
-        if (deviceType === 'audio') {
-            setAudio(!audio)
-            mediaDevice.toggle('Audio')
-        }
+        setAudio(!audio)
+        mediaDevice.toggle('Audio')
     }
 
     const onHandleChange = (e) => {

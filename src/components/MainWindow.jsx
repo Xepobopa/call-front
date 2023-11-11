@@ -28,7 +28,7 @@ export const MainWindow = ({ startCall }) => {
         if (!remoteId.trim()) {
             return setError('Your friend ID must be specified!')
         }
-        const config = { audio: true, video }
+        const config = { audio: true, video: false }
         startCall(true, remoteId, config)
     }
 

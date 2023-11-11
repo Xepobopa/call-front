@@ -96,7 +96,7 @@ export default function App() {
     const rejectCall = () => {
         socket.emit('end', { to: callFrom })
 
-        setShowModal(false)
+        setShowModal(false);
     }
 
     const onMessageReceive = (newMessage) => {

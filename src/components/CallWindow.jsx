@@ -95,18 +95,18 @@ export const CallWindow = ({
         <div className='call-window'>
             <div className='inner'>
                 <div className='video'>
-                    <video className='remote' ref={remoteVideo} autoPlay/>
-                    <video
-                        className='local'
-                        ref={localVideo}
-                        autoPlay
-                        muted
-                        onClick={() => setDragging(!dragging)}
-                        style={{
-                            top: `${coords.y}px`,
-                            left: `${coords.x}px`
-                        }}
-                    />
+                    <audio className='remote' ref={remoteVideo} autoPlay/>
+                    {/*<video*/}
+                    {/*    className='local'*/}
+                    {/*    ref={localVideo}*/}
+                    {/*    autoPlay*/}
+                    {/*    muted*/}
+                    {/*    onClick={() => setDragging(!dragging)}*/}
+                    {/*    style={{*/}
+                    {/*        top: `${coords.y}px`,*/}
+                    {/*        left: `${coords.x}px`*/}
+                    {/*    }}*/}
+                    {/*>*/}
                 </div>
 
                 {/*Chat*/}

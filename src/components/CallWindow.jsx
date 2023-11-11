@@ -27,17 +27,6 @@ export const CallWindow = ({
     })
 
     useEffect(() => {
-        const {width, height} = localVideo.current.getBoundingClientRect()
-        localVideoSize.current = {width, height}
-    }, [])
-
-    useEffect(() => {
-        dragging
-            ? localVideo.current.classList.add('dragging')
-            : localVideo.current.classList.remove('dragging')
-    }, [dragging])
-
-    useEffect(() => {
         window.addEventListener('mousemove', onMouseMove)
 
         return () => {
@@ -47,6 +36,7 @@ export const CallWindow = ({
 
     useEffect(() => {
         if (remoteVideo.current && remoteSrc) {
+            console.log('REMOTESRC', remoteSrc);
             remoteVideo.current.srcObject = remoteSrc
         }
         if (localVideo.current && localSrc) {

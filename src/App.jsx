@@ -90,7 +90,7 @@ export default function App() {
         setLocalSrc(null)
         setRemoteSrc(null)
 
-        setChat(null);
+        setChat([]);
     }
 
     const rejectCall = () => {

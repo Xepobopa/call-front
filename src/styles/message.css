@@ -1,0 +1,33 @@
+.message {
+    background-color: rgba(42, 47, 51, 255);
+    padding: 5px 10px;
+    margin: 5px 0;
+    display: flex;
+    flex-direction: column;
+    max-width: 90%;
+}
+
+.myMessage{
+    align-items: flex-end;
+    align-self: flex-end;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.otherMessage {
+    align-items: flex-start;
+    align-self: flex-start;
+}
+
+.from {
+    color: whitesmoke;
+    font-size: 16px;
+}
+
+.messageText {
+    color: #fff;
+    font-size: 16px;
+}
+
+.messageArea {
+    background-color: #292b2c;
+}

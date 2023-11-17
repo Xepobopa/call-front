@@ -2,13 +2,14 @@
 
 import './styles/app.scss'
 
-import { useState, useEffect } from 'react'
-import { BsPhoneVibrate } from 'react-icons/bs'
+import {useEffect, useState} from 'react'
+import {BsPhoneVibrate} from 'react-icons/bs'
 
 import PeerConnection from './utils/PeerConnection'
 import socket from './utils/socket'
 
-import { MainWindow, CallWindow, CallModal } from './components'
+import {CallModal, CallWindow, MainWindow} from './components'
+import randNickname from "./utils/randNickname";
 
 export default function App() {
     const [callFrom, setCallFrom] = useState('')
@@ -23,10 +24,12 @@ export default function App() {
     const [config, setConfig] = useState(null)
 
     const [chat, setChat] = useState([]);
+    const [nickname, setNickname] = useState('');
 
     useEffect(() => {
         console.log('App.jsx UseEffect #1: socket request');
-        socket.on('request', ({ from }) => {
+        socket.on('request', ({from}) => {
+            console.log('User', from, "is calling!");
             setCallFrom(from)
             setShowModal(true)
         })
@@ -59,6 +62,10 @@ export default function App() {
     }, [pc])
 
     const startCall = (isCaller, remoteId, config) => {
+        if (!nickname){
+            setNickname(randNickname());
+        }
+
         setShowModal(false)
         setCalling(true)
         setConfig(config)
@@ -94,7 +101,7 @@ export default function App() {
     }
 
     const rejectCall = () => {
-        socket.emit('end', { to: callFrom })
+        socket.emit('end', {to: callFrom})
 
         setShowModal(false);
     }
@@ -116,11 +123,11 @@ export default function App() {
     return (
         <div className='app'>
             <h1>Secret Chat</h1>
-            <MainWindow startCall={startCall} />
+            <MainWindow startCall={startCall} setNickname={setNickname}/>
             {calling && (
                 <div className='calling'>
                     <button disabled>
-                        <BsPhoneVibrate />
+                        <BsPhoneVibrate/>
                     </button>
                 </div>
             )}
@@ -140,6 +147,7 @@ export default function App() {
                     finishCall={finishCall}
                     chat={chat}
                     onNewMessage={onNewMessage}
+                    nickname={nickname}
                 />
             )}
         </div>

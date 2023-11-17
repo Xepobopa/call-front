@@ -3,7 +3,7 @@ import { BsCameraVideo, BsPhone } from 'react-icons/bs'
 
 import socket from '../utils/socket'
 
-export const MainWindow = ({ startCall }) => {
+export const MainWindow = ({ startCall, setNickname }) => {
     const [localId, setLocalId] = useState('')
     const [remoteId, setRemoteId] = useState('')
     const [error, setError] = useState('')
@@ -48,6 +48,14 @@ export const MainWindow = ({ startCall }) => {
                     onChange={({ target: { value } }) => {
                         setError('')
                         setRemoteId(value)
+                    }}
+                />
+                <input
+                    type='text'
+                    spellCheck={true}
+                    placeholder='Enter Yor nickname'
+                    onChange={({ target: { value } }) => {
+                        setNickname(value)
                     }}
                 />
                 <div className='control'>

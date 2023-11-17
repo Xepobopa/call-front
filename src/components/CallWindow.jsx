@@ -10,7 +10,8 @@ export const CallWindow = ({
                                mediaDevice,
                                finishCall,
                                chat,
-                               onNewMessage
+                               onNewMessage,
+                               nickname
                            }) => {
     const remoteVideo = useRef()
     const localVideo = useRef()
@@ -77,7 +78,9 @@ export const CallWindow = ({
 
     const onHandleSend = (e) => {
         console.log('[INFO] onHandleSend: ', newMessage)
-        onNewMessage({from, text: newMessage});
+        setNewMessage('');
+        console.log('[INFO] send new Message: ', {from: nickname, text: newMessage})
+        onNewMessage({from: nickname, text: newMessage});
     }
 
     return (
@@ -86,40 +89,27 @@ export const CallWindow = ({
             <div className='inner'>
                 <div className='video'>
                     <audio className='remote' ref={remoteVideo} autoPlay/>
-                    {/*<video*/}
-                    {/*    className='local'*/}
-                    {/*    ref={localVideo}*/}
-                    {/*    autoPlay*/}
-                    {/*    muted*/}
-                    {/*    onClick={() => setDragging(!dragging)}*/}
-                    {/*    style={{*/}
-                    {/*        top: `${coords.y}px`,*/}
-                    {/*        left: `${coords.x}px`*/}
-                    {/*    }}*/}
-                    {/*>*/}
                 </div>
 
-                {/*Chat*/}
                 <div>
-                    <div>
-                        <h1 style={{color: "white"}}>CHAT</h1>
-                        {chat.map(message => {
-                            return (
-                                <div key={Math.random() * 1000}>
-                                    <h4 style={{color: "white"}}>{message.from}:</h4>
-                                    <h5 style={{color: "white"}}>{message.text}</h5>
+                    {chat.map(message => {
+                        return (
+                            message.from === nickname ?
+                                <div className={'message myMessage'} key={Math.random() * 1000}>
+                                    <p className={'messageText'} style={{color: "wheat"}}>{message.text}</p>
                                 </div>
-                            )
-                        })}
-                    </div>
+                                :
+                                <div className={'message otherMessage'} key={Math.random() * 1000}>
+                                    <p className={'from'} style={{color: "wheat"}}>{message.from}</p>
+                                    <p className={'messageText'} style={{color: "wheat"}}>{message.text}</p>
+                                </div>
+                        )
+                    })}
                 </div>
 
                 <div>
                     <h1>Write Your message</h1>
                     <InputGroup>
-
-                        <input type="text" className="form-control" placeholder="From" aria-label="message"
-                               onChange={e => setFrom(e.target.value)}/>
                         <input type="text" className="form-control" placeholder="Message..." aria-label="message"
                                onChange={onHandleChange}/>
                     </InputGroup>
